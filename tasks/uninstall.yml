@@ -5,6 +5,38 @@
   failed_when: false
   register: tailscale_status
 
+- name: Uninstall | Add debug message
+  ansible.builtin.debug:
+    msg: "{{ tailscale_status }}"
+
+- name: Uninstall | Run tailscale bugreport before logout
+  ansible.builtin.command: tailscale bugreport
+  changed_when: false
+  failed_when: false
+  register: tailscale_bugreport
+
+- name: Uninstall | Add debug message
+  ansible.builtin.debug:
+    msg: "{{ tailscale_bugreport }}"
+
+- name: Uninstall | List content of /var/lib/tailscale
+  ansible.builtin.command: ls -la /var/lib/tailscale
+  changed_when: false
+  register: tailscale_lib_dir
+
+- name: Uninstall | Add debug message
+  ansible.builtin.debug:
+    msg: "{{ tailscale_lib_dir }}"
+
+- name: Uninstall | Gather tailscale version
+  ansible.builtin.command: tailscale version
+  changed_when: false
+  register: tailscale_version
+
+- name: Uninstall | Add debug message
+  ansible.builtin.debug:
+    msg: "{{ tailscale_version }}"
+
 - name: Uninstall | De-register Tailscale Node
   become: true
   # Hack to get correct changed/ok status
