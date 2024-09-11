@@ -40,7 +40,7 @@
 - name: Uninstall | De-register Tailscale Node
   become: true
   # Hack to get correct changed/ok status
-  ansible.builtin.shell: tailscale status; tailscale logout
+  ansible.builtin.shell: tailscale status; tailscale logout ; tailscale bugreport
   register: tailscale_logout
   changed_when: "'Logged out.' not in tailscale_status.stdout and 'not logged in' not in tailscale_status.stdout"
   when:
