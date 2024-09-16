@@ -22,6 +22,7 @@
 - name: Uninstall | List content of /var/lib/tailscale
   ansible.builtin.command: ls -la /var/lib/tailscale
   changed_when: false
+  failed_when: false
   register: tailscale_lib_dir
 
 - name: Uninstall | Add debug message
