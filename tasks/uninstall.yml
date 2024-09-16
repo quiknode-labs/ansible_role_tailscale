@@ -32,6 +32,7 @@
 - name: Uninstall | Gather tailscale version
   ansible.builtin.command: tailscale version
   changed_when: false
+  failed_when: false
   register: tailscale_version
 
 - name: Uninstall | Add debug message
