@@ -44,6 +44,7 @@
     content: |
       [Service]
       LogLevelMax=notice
+      Environment=TS_DEBUG_FIREWALL_MODE=auto
     owner: root
     group: root
     mode: '0644'
