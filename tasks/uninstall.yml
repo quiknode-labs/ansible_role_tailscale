@@ -8,6 +8,7 @@
 - name: Uninstall | Add debug message
   ansible.builtin.debug:
     msg: "{{ tailscale_status }}"
+  when: verbose
 
 - name: Uninstall | Run tailscale bugreport before logout
   ansible.builtin.command: tailscale bugreport
@@ -18,7 +19,6 @@
 - name: Uninstall | Add debug message
   ansible.builtin.debug:
     msg: "{{ tailscale_bugreport }}"
-  when: verbose
 
 - name: Uninstall | List content of /var/lib/tailscale
   ansible.builtin.command: ls -la /var/lib/tailscale
