@@ -1,7 +1,7 @@
 ---
 - name: Fetch Tailscale status
   listen: Confirm Tailscale is Connected
-  ansible.builtin.command: tailscale status --json
+  ansible.builtin.command: tailscale status --peers=false --json
   changed_when: false
   register: tailscale_status
 

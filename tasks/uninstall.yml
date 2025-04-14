@@ -1,6 +1,6 @@
 ---
 - name: Uninstall | Check If Tailscale Is Connected
-  ansible.builtin.command: tailscale status
+  ansible.builtin.command: tailscale status --peers=false --json
   changed_when: false
   failed_when: false
   register: tailscale_status
@@ -43,7 +43,7 @@
 - name: Uninstall | De-register Tailscale Node
   become: true
   # Hack to get correct changed/ok status
-  ansible.builtin.shell: tailscale status; tailscale logout ; tailscale bugreport
+  ansible.builtin.command: tailscale status --peers=false --json; tailscale logout ; tailscale bugreport
   register: tailscale_logout
   changed_when: "'Logged out.' not in tailscale_status.stdout and 'not logged in' not in tailscale_status.stdout"
   when:
